@@ -11,7 +11,7 @@ export default class App extends Component {
 
   async componentDidMount() {
     await this.fetchData()
-    // setInterval(() => this.fetchData(), 3000);
+    // setInterval(() => this.fetchData(), 5000);
   }
 
   async fetchData() {

@@ -1,11 +1,21 @@
 import React from 'react'
-import formatNumber from '../../helpers/formatter'
+import CountUp from 'react-countup';
 import css from './votesNumber.module.css'
 
 export default function VotesNumber({ votesNumber }) {
+
   return (
     <div>
-      <span className={css.numbers}>{formatNumber(votesNumber)}</span>
+      <CountUp
+        className={css.numbers}
+        start={0.00}
+        end={votesNumber}
+        duration={0.25}
+        separator="."
+        decimals={0}
+        decimal=","
+        suffix=""
+      ></CountUp>
     </div>
   )
 }
