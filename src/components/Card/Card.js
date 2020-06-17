@@ -8,17 +8,18 @@ import Stars from '../Stars/Stars'
 
 import css from './card.module.css'
 
-export default function Card(candidate) {
-  const { id, name, votes, percentage, popularity } = candidate.candidate
+export default function Card({ candidate, position, previousVote, previousPercentage }) {
+
+  const { id, name, votes, percentage, popularity, percentageCount } = candidate
   return (
     <div className="col s12">
       <div className={css.card}>
-        <Position id={id} />
+        <Position id={position} />
         <Photo name={name} photo={`${id}.jpg`} />
         <div className={`${css.infos} col s9`}>
           <Name name={name} />
-          <VotesNumber votesNumber={votes} />
-          <VotesPercentual votesPercentual={percentage} />
+          <VotesNumber votesNumber={votes} previousVote={previousVote} />
+          <VotesPercentual votesPercentual={percentage} previousPercentage={previousPercentage} />
           <Stars popularity={popularity} />
         </div>
       </div>

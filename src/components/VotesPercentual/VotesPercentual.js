@@ -2,12 +2,12 @@ import React from 'react'
 import CountUp from 'react-countup';
 import css from './votesPercentual.module.css'
 
-export default function VotesPercentual({ votesPercentual }) {
+export default function VotesPercentual({ votesPercentual, previousPercentage }) {
   return (
     <div>
       <CountUp
         className={css.numbers}
-        start={0.00}
+        start={previousPercentage}
         end={votesPercentual}
         duration={0.25}
         decimals={2}
