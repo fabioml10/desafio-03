@@ -27,8 +27,12 @@ export default class App extends Component {
     const { votes } = this.state
     return (
       <div className="container">
-        <h1>Votação</h1>
-        <Card votes={votes} />
+        <h1 className="align-center">Votação</h1>
+        <div className="row">
+          {votes.map(candidate => {
+            return <Card key={candidate.id} candidate={candidate} />
+          })}
+        </div>
       </div>
     )
   }

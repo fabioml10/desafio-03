@@ -1,9 +1,10 @@
 import React from 'react'
+import css from './name.module.css'
 
 export default function Name({ name }) {
   return (
     <div>
-      {name}
+      <span className={css.nameText}>{name}</span>
     </div>
   )
 }

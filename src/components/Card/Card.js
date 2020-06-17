@@ -6,23 +6,22 @@ import VotesNumber from '../VotesNumber/VotesNumber'
 import VotesPercentual from '../VotesPercentual/VotesPercentual'
 import Stars from '../Stars/Stars'
 
-export default function Card({ votes }) {
+import css from './card.module.css'
+
+export default function Card(candidate) {
+  const { id, name, votes, percentage, popularity } = candidate.candidate
   return (
-    <div>
-      {votes.map(({ id, name, votes, percentage, popularity }) => {
-        return (
-          <div key={id} className="card">
-            <Position id={id} />
-            <Photo name={name} photo={"https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2015/12/1450973046wordpress-errors.png"} />
-            <div className="infos">
-              <Name name={name} />
-              <VotesNumber votesNumber={votes} />
-              <VotesPercentual votesPercentual={percentage} />
-              <Stars popularity={popularity} />
-            </div>
-          </div>
-        )
-      })}
+    <div className="col s12">
+      <div className={css.card}>
+        <Position id={id} />
+        <Photo name={name} photo={`${id}.jpg`} />
+        <div className={`${css.infos} col s9`}>
+          <Name name={name} />
+          <VotesNumber votesNumber={votes} />
+          <VotesPercentual votesPercentual={percentage} />
+          <Stars popularity={popularity} />
+        </div>
+      </div>
     </div>
   )
 }
