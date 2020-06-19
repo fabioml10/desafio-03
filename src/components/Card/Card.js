@@ -10,7 +10,7 @@ import css from './card.module.css'
 
 export default function Card({ candidate, position, previousVote, previousPercentage }) {
 
-  const { id, name, votes, percentage, popularity, percentageCount } = candidate
+  const { id, name, votes, percentage, popularity } = candidate
   return (
     <div className="col s12">
       <div className={css.card}>

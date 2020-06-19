@@ -1,42 +1,40 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Candidates from './components/Candidates/Candidates';
 import Header from './components/Header/Header';
 
-export default class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      candidates: [],
-      previousVotes: []
+export default function App() {
+
+  const [candidates, setCandidates] = useState([])
+  const [previousVotes, setPreviousVotes] = useState([])
+
+  useEffect(() => {
+
+    const fetchVotes = async () => {
+      const res = await fetch('http://localhost:8080/votes')
+      const json = await res.json()
+
+      const previousVotes = candidates.map(({ id, votes, percentage }) => {
+        return { id, votes, percentage }
+      })
+
+      setCandidates(json.candidates)
+      setPreviousVotes(previousVotes)
     }
-  }
 
-  async componentDidMount() {
-    await this.fetchData()
-    setInterval(() => this.fetchData(), 1000);
-  }
+    const interval = setInterval(() => {
+      fetchVotes()
+    }, 1000)
 
-  async fetchData() {
-    const res = await fetch('http://localhost:8080/votes')
-    const json = await res.json()
+    return () => {
+      clearInterval(interval)
+    }
 
-    const previousVotes = this.state.candidates.map(({ id, votes, percentage }) => {
-      return { id, votes, percentage }
-    })
+  }, [candidates]) //variaveis que são utilizadas dentro do effect
 
-    this.setState({
-      candidates: json.candidates,
-      previousVotes
-    })
-  }
-
-  render() {
-    const { candidates, previousVotes } = this.state
-    return (
-      <div className="container">
-        <Header>Votação</Header>
-        <Candidates candidates={candidates} previousVotes={previousVotes} />
-      </div>
-    )
-  }
+  return (
+    <div className="container">
+      <Header>Votação</Header>
+      <Candidates candidates={candidates} previousVotes={previousVotes} />
+    </div>
+  )
 }
